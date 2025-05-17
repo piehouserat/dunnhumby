@@ -9,9 +9,36 @@ export async function getCategories() {
   return categoriesData;
 }
 
-export async function getProducts() {
-  const products = await fetch(`${baseUrl}/products`);
-  const productsData: Product[] = await products.json();
+export type GetProductsParams = {
+  page?: number;
+  pageSize?: number;
+  categoryId?: string;
+};
+
+export type PaginatedResponse<T> = {
+  data: T[];
+  total: number;
+};
+
+function createQueryString(
+  params: Record<string, string | number | null | undefined>,
+): string {
+  const filteredParams = Object.fromEntries(
+    Object.entries(params).filter(
+      ([_, value]) => value != null && value !== "",
+    ),
+  );
+  return new URLSearchParams(
+    filteredParams as Record<string, string>,
+  ).toString();
+}
+
+export async function getProducts(
+  params: GetProductsParams,
+): Promise<PaginatedResponse<Product>> {
+  const queryString = `${baseUrl}/products?${createQueryString(params)}`;
+  const products = await fetch(queryString);
+  const productsData: PaginatedResponse<Product> = await products.json();
 
   return productsData;
 }

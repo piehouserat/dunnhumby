@@ -1613,6 +1613,16 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "Dunnhumby.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Dunnhumby.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dunnhumby.Contracts.dll": {}
+        }
+      },
       "Dunnhumby.DataAccess/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -1644,6 +1654,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Dunnhumby.Contracts": "1.0.0",
           "Dunnhumby.DataAccess": "1.0.0",
           "Dunnhumby.Domain": "1.0.0"
         },
@@ -4334,6 +4345,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Dunnhumby.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../Dunnhumby.Contracts/Dunnhumby.Contracts.csproj",
+      "msbuildProject": "../Dunnhumby.Contracts/Dunnhumby.Contracts.csproj"
+    },
     "Dunnhumby.DataAccess/1.0.0": {
       "type": "project",
       "path": "../Dunnhumby.DataAccess/Dunnhumby.DataAccess.csproj",
@@ -4352,6 +4368,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Dunnhumby.Contracts >= 1.0.0",
       "Dunnhumby.Services >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.2",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.5"
@@ -4382,6 +4399,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
+            "/Users/martin/Code/dunnhumby/backend/Dunnhumby.Contracts/Dunnhumby.Contracts.csproj": {
+              "projectPath": "/Users/martin/Code/dunnhumby/backend/Dunnhumby.Contracts/Dunnhumby.Contracts.csproj"
+            },
             "/Users/martin/Code/dunnhumby/backend/Dunnhumby.Services/Dunnhumby.Services.csproj": {
               "projectPath": "/Users/martin/Code/dunnhumby/backend/Dunnhumby.Services/Dunnhumby.Services.csproj"
             }

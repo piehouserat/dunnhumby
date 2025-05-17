@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "Dunnhumby.Api/1.0.0": {
         "dependencies": {
+          "Dunnhumby.Contracts": "1.0.0",
           "Dunnhumby.Services": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "9.0.2",
           "Microsoft.EntityFrameworkCore.Design": "9.0.5"
@@ -1114,6 +1115,14 @@
         }
       },
       "System.Threading.Channels/7.0.0": {},
+      "Dunnhumby.Contracts/1.0.0": {
+        "runtime": {
+          "Dunnhumby.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Dunnhumby.DataAccess/1.0.0": {
         "dependencies": {
           "Dunnhumby.Domain": "1.0.0",
@@ -1139,6 +1148,7 @@
       },
       "Dunnhumby.Services/1.0.0": {
         "dependencies": {
+          "Dunnhumby.Contracts": "1.0.0",
           "Dunnhumby.DataAccess": "1.0.0",
           "Dunnhumby.Domain": "1.0.0"
         },
@@ -1660,6 +1670,11 @@
       "sha512": "sha512-qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA==",
       "path": "system.threading.channels/7.0.0",
       "hashPath": "system.threading.channels.7.0.0.nupkg.sha512"
+    },
+    "Dunnhumby.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Dunnhumby.DataAccess/1.0.0": {
       "type": "project",

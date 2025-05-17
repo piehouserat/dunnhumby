@@ -12,8 +12,5 @@ export type Product = {
   stockQuantity: number;
   dateAdded: string;
   categoryId: string;
-};
-
-export type ProductWithCategory = Product & {
-  category: Category;
+  categoryName: string;
 };

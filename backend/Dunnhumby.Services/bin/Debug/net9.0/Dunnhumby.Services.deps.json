@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "Dunnhumby.Services/1.0.0": {
         "dependencies": {
+          "Dunnhumby.Contracts": "1.0.0",
           "Dunnhumby.DataAccess": "1.0.0",
           "Dunnhumby.Domain": "1.0.0"
         },
@@ -679,6 +680,14 @@
           }
         }
       },
+      "Dunnhumby.Contracts/1.0.0": {
+        "runtime": {
+          "Dunnhumby.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Dunnhumby.DataAccess/1.0.0": {
         "dependencies": {
           "Dunnhumby.Domain": "1.0.0",
@@ -1031,6 +1040,11 @@
       "sha512": "sha512-r2JRkLjsYrq5Dpo7+y3Wa73OfirZPdVhxiTJWwZ+oJM7FOAe0LkM3GlH+pgkNRdd1G1kwUbmRCdmh4uoaWwu1g==",
       "path": "system.text.json/9.0.3",
       "hashPath": "system.text.json.9.0.3.nupkg.sha512"
+    },
+    "Dunnhumby.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Dunnhumby.DataAccess/1.0.0": {
       "type": "project",

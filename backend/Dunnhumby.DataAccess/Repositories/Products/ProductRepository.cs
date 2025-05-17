@@ -1,3 +1,4 @@
+using Dunnhumby.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Dunnhumby.Domain.Products;
 
@@ -12,9 +13,26 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Product>> GetAllAsync()
+    public async Task<PagedResult<Product>> GetAllAsync(int pageNumber, int pageSize, Guid? categoryId = null)
     {
-        return await _context.Products.ToListAsync();
+        var query = _context.Products
+            .Include(p => p.Category)
+            .AsQueryable();
+
+        if (categoryId.HasValue)
+        {
+            query = query.Where(p => p.CategoryId == categoryId.Value);
+        }
+
+        var totalCount = await query.CountAsync();
+
+        var products = await query
+            .OrderByDescending(p => p.DateAdded)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResult<Product>(products, totalCount);
     }
 
     public async Task<Product?> GetByIdAsync(Guid id)
@@ -37,5 +55,10 @@ public class ProductRepository : IProductRepository
         {
             throw new Exception("Product not found");
         }
+    }
+
+    public async Task DeleteAllAsync()
+    {
+        await _context.Products.ExecuteDeleteAsync();
     }
 }

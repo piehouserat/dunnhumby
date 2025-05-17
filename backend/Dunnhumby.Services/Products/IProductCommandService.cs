@@ -1,10 +1,10 @@
-using Dunnhumby.Domain.Products;
+using Dunnhumby.Contracts;
 
 namespace Dunnhumby.Services.Products;
 
 public interface IProductCommandService
 {
-    // Task<Product> AddProductAsync(string name, decimal price, ProductType type);
+    Task<Guid> CreateProductAsync(CreateProductRequest request);
     
     Task DeleteProductAsync(Guid id);
     

@@ -32,3 +32,6 @@
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Services/obj/Debug/net9.0/refint/Dunnhumby.Services.dll
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Services/obj/Debug/net9.0/Dunnhumby.Services.pdb
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Services/obj/Debug/net9.0/ref/Dunnhumby.Services.dll
+/Users/martin/Code/dunnhumby/backend/Dunnhumby.Services/obj/Debug/net9.0/Dunnhumby.Services.sourcelink.json
+/Users/martin/Code/dunnhumby/backend/Dunnhumby.Services/bin/Debug/net9.0/Dunnhumby.Contracts.dll
+/Users/martin/Code/dunnhumby/backend/Dunnhumby.Services/bin/Debug/net9.0/Dunnhumby.Contracts.pdb

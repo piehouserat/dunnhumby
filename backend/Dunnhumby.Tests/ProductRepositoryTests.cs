@@ -69,9 +69,9 @@ public class ProductRepositoryTests : IAsyncLifetime
         await repository.AddAsync(new Product { Id = Guid.NewGuid(), Name = "Product 2", CategoryId = category.Id, Price = 12.49m });
 
         // Act
-        var products = await repository.GetAllAsync();
+        var products = await repository.GetAllAsync(1, 10);
 
         // Assert
-        Assert.Equal(2, products.Count());
+        Assert.Equal(2, products.TotalCount);
     }
 }

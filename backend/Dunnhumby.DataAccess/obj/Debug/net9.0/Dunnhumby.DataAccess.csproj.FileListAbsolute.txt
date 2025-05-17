@@ -32,3 +32,4 @@
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.DataAccess/obj/Debug/net9.0/Dunnhumby.DataAccess.pdb
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.DataAccess/obj/Debug/net9.0/Dunnhumby.DataAccess.genruntimeconfig.cache
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.DataAccess/obj/Debug/net9.0/ref/Dunnhumby.DataAccess.dll
+/Users/martin/Code/dunnhumby/backend/Dunnhumby.DataAccess/obj/Debug/net9.0/Dunnhumby.DataAccess.sourcelink.json

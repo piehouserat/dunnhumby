@@ -12,6 +12,7 @@ import {
 import { MoreHorizontalIcon } from "lucide-react";
 import Link from "next/link";
 import type { Category } from "@/lib/types";
+import { toast } from "sonner";
 
 export const columns: ColumnDef<Category>[] = [
   {
@@ -34,7 +35,11 @@ export const columns: ColumnDef<Category>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(category.id)}
+              onClick={() => {
+                navigator.clipboard.writeText(category.id);
+
+                toast.success("Category ID copied to clipboard");
+              }}
             >
               Copy category ID
             </DropdownMenuItem>

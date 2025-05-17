@@ -370,3 +370,6 @@
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Api/obj/Debug/net9.0/Dunnhumby.Api.pdb
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Api/obj/Debug/net9.0/Dunnhumby.Api.genruntimeconfig.cache
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Api/obj/Debug/net9.0/ref/Dunnhumby.Api.dll
+/Users/martin/Code/dunnhumby/backend/Dunnhumby.Api/obj/Debug/net9.0/Dunnhumby.Api.sourcelink.json
+/Users/martin/Code/dunnhumby/backend/Dunnhumby.Api/bin/Debug/net9.0/Dunnhumby.Contracts.dll
+/Users/martin/Code/dunnhumby/backend/Dunnhumby.Api/bin/Debug/net9.0/Dunnhumby.Contracts.pdb

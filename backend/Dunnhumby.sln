@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dunnhumby.Common", "Dunnhum
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dunnhumby.Api", "Dunnhumby.Api\Dunnhumby.Api.csproj", "{EFBB6DF4-BC01-4839-AF16-721336C23481}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dunnhumby.Contracts", "Dunnhumby.Contracts\Dunnhumby.Contracts.csproj", "{7E50A602-A8BD-4022-8359-480C7BA06C71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,18 @@ Global
 		{EFBB6DF4-BC01-4839-AF16-721336C23481}.Release|x64.Build.0 = Release|Any CPU
 		{EFBB6DF4-BC01-4839-AF16-721336C23481}.Release|x86.ActiveCfg = Release|Any CPU
 		{EFBB6DF4-BC01-4839-AF16-721336C23481}.Release|x86.Build.0 = Release|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Debug|x64.Build.0 = Debug|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Debug|x86.Build.0 = Debug|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Release|x64.ActiveCfg = Release|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Release|x64.Build.0 = Release|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Release|x86.ActiveCfg = Release|Any CPU
+		{7E50A602-A8BD-4022-8359-480C7BA06C71}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

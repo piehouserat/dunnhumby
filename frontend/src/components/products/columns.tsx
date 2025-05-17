@@ -11,10 +11,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontalIcon } from "lucide-react";
 import Link from "next/link";
-import type { ProductWithCategory } from "@/lib/types";
+import type { Product } from "@/lib/types";
 import { CurrencyFormatter, DateTimeFormatter } from "../formatters";
+import { toast } from "sonner";
 
-export const columns: ColumnDef<ProductWithCategory>[] = [
+export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -28,20 +29,20 @@ export const columns: ColumnDef<ProductWithCategory>[] = [
     header: "SKU",
   },
   {
+    accessorKey: "categoryName",
+    header: "Category",
+  },
+  {
+    header: "Price",
+    cell: ({ row }) => <CurrencyFormatter value={row.original.price} />,
+  },
+  {
     accessorKey: "stockQuantity",
     header: "Stock Quantity",
   },
   {
     header: "Date Added",
     cell: ({ row }) => <DateTimeFormatter value={row.original.dateAdded} />,
-  },
-  // {
-  //   accessorKey: "category",
-  //   header: "Category",
-  // },
-  {
-    header: "Price",
-    cell: ({ row }) => <CurrencyFormatter value={row.original.price} />,
   },
   {
     id: "actions",
@@ -59,7 +60,11 @@ export const columns: ColumnDef<ProductWithCategory>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(product.id)}
+              onClick={() => {
+                navigator.clipboard.writeText(product.id);
+
+                toast.success("Product ID copied to clipboard");
+              }}
             >
               Copy product ID
             </DropdownMenuItem>

@@ -20,3 +20,4 @@
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Domain/obj/Debug/net9.0/refint/Dunnhumby.Domain.dll
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Domain/obj/Debug/net9.0/Dunnhumby.Domain.pdb
 /Users/martin/Code/dunnhumby/backend/Dunnhumby.Domain/obj/Debug/net9.0/ref/Dunnhumby.Domain.dll
+/Users/martin/Code/dunnhumby/backend/Dunnhumby.Domain/obj/Debug/net9.0/Dunnhumby.Domain.sourcelink.json

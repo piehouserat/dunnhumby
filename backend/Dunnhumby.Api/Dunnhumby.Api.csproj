@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dunnhumby.Contracts\Dunnhumby.Contracts.csproj" />
     <ProjectReference Include="..\Dunnhumby.Services\Dunnhumby.Services.csproj" />
   </ItemGroup>
 
