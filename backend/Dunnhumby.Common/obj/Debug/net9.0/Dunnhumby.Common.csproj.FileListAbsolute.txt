@@ -1,0 +1,12 @@
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/bin/Debug/net9.0/Dunnhumby.Common.deps.json
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/bin/Debug/net9.0/Dunnhumby.Common.dll
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/bin/Debug/net9.0/Dunnhumby.Common.pdb
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/Dunnhumby.Common.csproj.AssemblyReference.cache
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/Dunnhumby.Common.GeneratedMSBuildEditorConfig.editorconfig
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/Dunnhumby.Common.AssemblyInfoInputs.cache
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/Dunnhumby.Common.AssemblyInfo.cs
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/Dunnhumby.Common.csproj.CoreCompileInputs.cache
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/Dunnhumby.Common.dll
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/refint/Dunnhumby.Common.dll
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/Dunnhumby.Common.pdb
+/Users/martin/RiderProjects/Dunnhumby/Dunnhumby.Common/obj/Debug/net9.0/ref/Dunnhumby.Common.dll
