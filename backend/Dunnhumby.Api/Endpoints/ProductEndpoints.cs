@@ -1,5 +1,7 @@
+using Dunnhumby.Common.Extensions;
 using Dunnhumby.Contracts;
 using Dunnhumby.Services.Products;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Dunnhumby.Api.Endpoints;
 
@@ -48,7 +50,31 @@ public static class ProductEndpoints
             }
         });
 
-
+        endpoints.MapDelete("/products/{productId:guid}", async (Guid productId, IProductCommandService productService) =>
+        {
+            try
+            {
+                await productService.DeleteProductAsync(productId);
+                return Results.NoContent();
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem($"Failed to delete product: {ex.Message}");
+            }
+        });
+        
+        endpoints.MapGet("/products/totals", async (
+            [FromQuery] DateTime? fromDate, 
+            [FromQuery] DateTime? toDate, 
+            IProductQueryService productService) =>
+        {
+            var from = fromDate ?? DateTime.Now.Date.StartOfMonth();
+            var to = toDate ?? DateTime.Now;
+    
+            var totals = await productService.GetProductTotalsAsync(from, to);
+            return Results.Ok(totals);
+        });
+        
         return endpoints;
     }
 }

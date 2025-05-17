@@ -1,6 +1,7 @@
 import { columns } from "@/components/products/columns";
 import { ProductsTable } from "@/components/products/products-table";
 import { ProductsTableFilters } from "@/components/products/products-table-filters";
+import { AddProductDialog } from "@/components/products/add-product-dialog";
 import {
   getProducts,
   getCategories,
@@ -32,7 +33,10 @@ export default async function Products({
 
   return (
     <div className="space-y-4">
-      <ProductsTableFilters categories={categories} />
+      <div className="flex justify-between items-center">
+        <ProductsTableFilters categories={categories} />
+        <AddProductDialog categories={categories} />
+      </div>
       <ProductsTable columns={columns} data={products} pageCount={pageCount} />
     </div>
   );

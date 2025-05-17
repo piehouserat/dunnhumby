@@ -23,7 +23,11 @@ public class ProductCommandService : IProductCommandService
             Id = Guid.NewGuid(),
             Name = request.Name,
             Price = request.Price,
-            CategoryId = request.CategoryId
+            CategoryId = request.CategoryId,
+            ProductCode = request.ProductCode,
+            Sku = request.Sku,
+            StockQuantity = request.StockQuantity,
+            DateAdded = DateTime.UtcNow,
         };
 
         await _productRepository.AddAsync(product);

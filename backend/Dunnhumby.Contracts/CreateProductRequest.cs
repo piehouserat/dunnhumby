@@ -7,4 +7,10 @@ public record CreateProductRequest
     public decimal Price { get; init; }
     
     public Guid CategoryId { get; init; }
+    
+    public string ProductCode { get; init; } = null!;
+    
+    public string Sku { get; init; } = null!;
+    
+    public int StockQuantity { get; init; }
 }

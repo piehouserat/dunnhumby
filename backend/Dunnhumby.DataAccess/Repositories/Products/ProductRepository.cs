@@ -61,4 +61,26 @@ public class ProductRepository : IProductRepository
     {
         await _context.Products.ExecuteDeleteAsync();
     }
+    
+    public async Task<IEnumerable<Product>> GetProductsInDateRangeAsync(DateTime fromDate, DateTime toDate)
+    {
+        return await _context.Products
+            .Where(p => p.DateAdded >= fromDate && p.DateAdded <= toDate)
+            .ToListAsync();
+    }
+    
+    public async Task<IEnumerable<CategoryTotalResult>> GetCategoryTotalsInDateRangeAsync(DateTime fromDate, DateTime toDate)
+    {
+        return await _context.Products
+            .Include(p => p.Category)
+            .Where(p => p.DateAdded >= fromDate && p.DateAdded <= toDate)
+            .GroupBy(p => new { p.CategoryId, p.Category.Name })
+            .Select(g => new CategoryTotalResult(
+                g.Key.CategoryId,
+                g.Key.Name,
+                g.Sum(p => p.StockQuantity),
+                g.Sum(p => p.Price * p.StockQuantity)
+            ))
+            .ToListAsync();
+    }
 }

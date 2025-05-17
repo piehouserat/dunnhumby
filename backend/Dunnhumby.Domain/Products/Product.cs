@@ -24,10 +24,8 @@ public class Product
 
     public DateTime DateAdded { get; set; } = DateTime.UtcNow;
 
-    // Foreign Key
     [ForeignKey("Category")]
     public Guid CategoryId { get; set; }
 
-    // Navigation Property
     public Category? Category { get; set; }
 }

@@ -14,6 +14,8 @@ import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { CurrencyFormatter, DateTimeFormatter } from "../formatters";
 import { toast } from "sonner";
+import { useAction } from "next-safe-action/hooks";
+import { deleteProductAction } from "@/actions/delete-product-action";
 
 export const columns: ColumnDef<Product>[] = [
   {
@@ -50,6 +52,19 @@ export const columns: ColumnDef<Product>[] = [
     cell: ({ row }) => {
       const product = row.original;
 
+      const deleteAction = useAction(deleteProductAction, {
+        onSuccess: () => {
+          toast.success("Product deleted successfully");
+        },
+        onError: (error) => {
+          toast.error("Failed to delete product");
+        },
+      });
+
+      const handleDelete = () => {
+        deleteAction.execute({ id: product.id });
+      };
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -73,6 +88,9 @@ export const columns: ColumnDef<Product>[] = [
               <Link href={`/settings/categories/${product.id}/edit`}>
                 Edit product
               </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDelete}>
+              Delete product
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

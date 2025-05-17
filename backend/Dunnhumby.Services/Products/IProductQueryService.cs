@@ -8,4 +8,6 @@ public interface IProductQueryService
     Task<PaginatedResponse<ProductDto>> GetAllProductsAsync(int pageNumber, int pageSize, Guid? categoryId = null);
     
     Task<ProductDto?> GetProductByIdAsync(Guid id);
+    
+    Task<ProductTotalsDto> GetProductTotalsAsync(DateTime? fromDate = null, DateTime? toDate = null);
 }

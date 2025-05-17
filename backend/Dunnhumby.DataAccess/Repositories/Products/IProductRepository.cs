@@ -14,4 +14,8 @@ public interface IProductRepository
     Task DeleteAsync(Guid id);
     
     Task DeleteAllAsync();
+    
+    Task<IEnumerable<Product>> GetProductsInDateRangeAsync(DateTime fromDate, DateTime toDate);
+    
+    Task<IEnumerable<CategoryTotalResult>> GetCategoryTotalsInDateRangeAsync(DateTime fromDate, DateTime toDate);
 }

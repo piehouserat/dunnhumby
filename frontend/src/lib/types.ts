@@ -14,3 +14,12 @@ export type Product = {
   categoryId: string;
   categoryName: string;
 };
+
+export type CreateProduct = {
+  name: string;
+  price: number;
+  categoryId: string;
+  productCode?: string;
+  sku?: string;
+  stockQuantity?: number;
+};

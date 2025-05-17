@@ -1,5 +1,6 @@
 using Dunnhumby.Contracts;
 using Dunnhumby.DataAccess.Repositories.Products;
+using Dunnhumby.Common.Extensions;
 
 namespace Dunnhumby.Services.Products;
 
@@ -46,6 +47,33 @@ public class ProductQueryService : IProductQueryService
             product.DateAdded,
             product.CategoryId,
             product.Category?.Name ?? string.Empty
+        );
+    }
+
+    public async Task<ProductTotalsDto> GetProductTotalsAsync(DateTime? fromDate = null, DateTime? toDate = null)
+    {
+        var from = fromDate ?? DateTime.Now.Date.StartOfMonth();
+        var to = toDate ?? DateTime.Now;
+
+        var products = await _repository.GetProductsInDateRangeAsync(from, to);
+        var categoryTotals = await _repository.GetCategoryTotalsInDateRangeAsync(from, to);
+
+        var categoryTotalsDtos = categoryTotals
+            .Select(ct => new CategoryTotalsDto(
+                ct.CategoryId,
+                ct.CategoryName,
+                ct.TotalQuantity,
+                ct.TotalValue
+            ))
+            .ToList();
+
+        return new ProductTotalsDto(
+            TotalProductCount: products.Count(),
+            TotalStockQuantity: products.Sum(p => p.StockQuantity),
+            TotalStockValue: products.Sum(p => p.Price * p.StockQuantity),
+            CategoryTotals: categoryTotalsDtos,
+            FromDate: from,
+            ToDate: to
         );
     }
 }
