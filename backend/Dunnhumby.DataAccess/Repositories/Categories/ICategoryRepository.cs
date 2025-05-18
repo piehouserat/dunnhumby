@@ -13,4 +13,6 @@ public interface ICategoryRepository
     Task UpdateAsync(Category category);
     
     Task DeleteAsync(Guid id);
+    
+    Task<IEnumerable<CategoryTotalResult>> GetCategoryTotalsInDateRangeAsync(DateTime fromDate, DateTime toDate);
 }

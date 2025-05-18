@@ -44,4 +44,21 @@ public class CategoryRepository : ICategoryRepository
             await _context.SaveChangesAsync();
         }
     }
+    
+    public async Task<IEnumerable<CategoryTotalResult>> GetCategoryTotalsInDateRangeAsync(DateTime fromDate, DateTime toDate)
+    {
+        return await _context.Categories
+            .GroupJoin(
+                _context.Products.Where(p => p.DateAdded >= fromDate && p.DateAdded <= toDate),
+                c => c.Id,
+                p => p.CategoryId,
+                (category, products) => new CategoryTotalResult(
+                    category.Id,
+                    category.Name,
+                    products.Count(),
+                    products.DefaultIfEmpty().Sum(p => p == null ? 0 : p.StockQuantity),
+                    products.DefaultIfEmpty().Sum(p => p == null ? 0 : p.Price * p.StockQuantity)
+                ))
+            .ToListAsync();
+    }
 }

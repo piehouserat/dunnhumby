@@ -10,4 +10,6 @@ public interface IProductQueryService
     Task<ProductDto?> GetProductByIdAsync(Guid id);
     
     Task<ProductTotalsDto> GetProductTotalsAsync(DateTime? fromDate = null, DateTime? toDate = null);
+    
+    Task<IEnumerable<DailyProductStats>> GetDailyProductStatsAsync(DateTime? fromDate, DateTime? toDate);
 }

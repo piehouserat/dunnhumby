@@ -3,6 +3,7 @@ import { columns } from "@/components/categories/columns";
 import { Header } from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { getCategories } from "@/lib/api-utils";
+import { PlusIcon } from "lucide-react";
 
 export default async function Categories() {
   const categories = await getCategories();
@@ -12,7 +13,10 @@ export default async function Categories() {
       <Header
         actions={
           <div className="flex gap-4 items-center">
-            <Button>Add Category</Button>
+            <Button>
+              <PlusIcon />
+              Add Category
+            </Button>
           </div>
         }
       />

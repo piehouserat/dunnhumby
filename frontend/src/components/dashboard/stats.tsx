@@ -2,16 +2,23 @@ import {
   ActivityIcon,
   CreditCardIcon,
   DollarSignIcon,
+  LayersIcon,
+  ListIcon,
+  Package2Icon,
+  PackageIcon,
+  PoundSterlingIcon,
   UsersIcon,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { Totals } from "@/lib/types";
+import type { CategoryTotals, Totals } from "@/lib/types";
+import { CurrencyFormatter } from "../formatters";
 
 interface StatsProps {
   totals: Totals;
+  categoryTotals: CategoryTotals[];
 }
 
-export function Stats({ totals }: StatsProps) {
+export function Stats({ totals, categoryTotals = [] }: StatsProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
@@ -19,11 +26,11 @@ export function Stats({ totals }: StatsProps) {
           <CardTitle className="text-sm font-medium">
             Total Stock Value
           </CardTitle>
-          <DollarSignIcon className="h-4 w-4 text-muted-foreground" />
+          <PoundSterlingIcon className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
-            ${totals.totalStockValue.toLocaleString()}
+            <CurrencyFormatter value={totals.totalStockValue} />
           </div>
           <p className="text-xs text-muted-foreground">
             Total value of all stock
@@ -33,7 +40,7 @@ export function Stats({ totals }: StatsProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Products</CardTitle>
-          <UsersIcon className="h-4 w-4 text-muted-foreground" />
+          <PackageIcon className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{totals.totalProductCount}</div>
@@ -45,7 +52,7 @@ export function Stats({ totals }: StatsProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Stock</CardTitle>
-          <CreditCardIcon className="h-4 w-4 text-muted-foreground" />
+          <LayersIcon className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
@@ -59,12 +66,10 @@ export function Stats({ totals }: StatsProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Categories</CardTitle>
-          <ActivityIcon className="h-4 w-4 text-muted-foreground" />
+          <ListIcon className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
-            {totals.categoryTotals.length}
-          </div>
+          <div className="text-2xl font-bold">{categoryTotals.length}</div>
           <p className="text-xs text-muted-foreground">Total categories</p>
         </CardContent>
       </Card>

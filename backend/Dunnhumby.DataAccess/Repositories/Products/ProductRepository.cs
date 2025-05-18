@@ -69,19 +69,22 @@ public class ProductRepository : IProductRepository
             .ToListAsync();
     }
     
-    public async Task<IEnumerable<CategoryTotalResult>> GetCategoryTotalsInDateRangeAsync(DateTime fromDate, DateTime toDate)
+    public async Task<IEnumerable<(DateTime Date, int ProductCount, int StockQuantity)>> GetDailyProductStatsAsync(
+        DateTime fromDate, 
+        DateTime toDate)
     {
-        return await _context.Products
-            .Include(p => p.Category)
-            .Where(p => p.DateAdded >= fromDate && p.DateAdded <= toDate)
-            .GroupBy(p => new { p.CategoryId, p.Category.Name })
-            .Select(g => new CategoryTotalResult(
-                g.Key.CategoryId,
-                g.Key.Name,
-                g.Count(),
-                g.Sum(p => p.StockQuantity),
-                g.Sum(p => p.Price * p.StockQuantity)
-            ))
+        var results = await _context.Products
+            .Where(p => p.DateAdded.Date >= fromDate.Date && p.DateAdded.Date <= toDate.Date)
+            .GroupBy(p => p.DateAdded.Date)
+            .Select(g => new
+            {
+                Date = g.Key,
+                ProductCount = g.Count(),
+                InitialStockQuantity = g.Sum(p => p.StockQuantity)
+            })
+            .OrderBy(x => x.Date)
             .ToListAsync();
+
+        return results.Select(r => (r.Date, r.ProductCount, r.InitialStockQuantity));
     }
 }

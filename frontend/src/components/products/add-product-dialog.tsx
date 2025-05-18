@@ -129,9 +129,12 @@ export function AddProductDialog({ categories }: AddProductDialogProps) {
                     name="price"
                     type="number"
                     step="0.01"
-                    value={field.state.value}
+                    value={field.state.value === 0 ? "" : field.state.value}
                     onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.valueAsNumber)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      field.handleChange(val === "" ? 0 : Number(val));
+                    }}
                   />
                   <FieldInfo field={field} />
                 </>
@@ -207,9 +210,12 @@ export function AddProductDialog({ categories }: AddProductDialogProps) {
                     name="stockQuantity"
                     type="number"
                     min="0"
-                    value={field.state.value}
+                    value={field.state.value === 0 ? "" : field.state.value}
                     onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.valueAsNumber)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      field.handleChange(val === "" ? 0 : Number(val));
+                    }}
                   />
                   <FieldInfo field={field} />
                 </>

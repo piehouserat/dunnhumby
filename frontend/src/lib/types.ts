@@ -28,7 +28,6 @@ export type Totals = {
   totalProductCount: number;
   totalStockQuantity: number;
   totalStockValue: number;
-  categoryTotals: CategoryTotals[];
 };
 
 export type CategoryTotals = {
@@ -37,4 +36,10 @@ export type CategoryTotals = {
   productCount: number;
   stockQuantity: number;
   stockValue: number;
+};
+
+export type ProductDailyStats = {
+  date: string;
+  productsAdded: number;
+  stockAdded: number;
 };

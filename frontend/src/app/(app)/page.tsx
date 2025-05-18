@@ -1,8 +1,12 @@
 import { Overview } from "@/components/dashboard/overview";
-import { getTotals, type GetTotalsParams } from "@/lib/api-utils";
-import { parseAsString, type SearchParams } from "nuqs/server";
-import { getStartOfCurrentMonth, getToday } from "@/lib/date-utils";
-import { format } from "date-fns";
+import {
+  getCategoryTotals,
+  getProductDailyStats,
+  getProductTotals,
+  type GetTotalsParams,
+} from "@/lib/api-utils";
+import type { SearchParams } from "nuqs/server";
+import { format, startOfDay, endOfDay } from "date-fns";
 import { dateRangeSearchParamsCache } from "@/lib/search-params";
 
 export default async function Page({
@@ -13,11 +17,21 @@ export default async function Page({
   const { from, to } = await dateRangeSearchParamsCache.parse(searchParams);
 
   const totalsParams: GetTotalsParams = {
-    startDate: format(from, "yyyy-MM-dd"),
-    endDate: format(to, "yyyy-MM-dd"),
+    startDate: format(startOfDay(from), "yyyy-MM-dd"),
+    endDate: format(endOfDay(to), "yyyy-MM-dd"),
   };
 
-  const totals = await getTotals(totalsParams);
+  const [totals, categoryTotals, productDailyStats] = await Promise.all([
+    getProductTotals(totalsParams),
+    getCategoryTotals(totalsParams),
+    getProductDailyStats(totalsParams),
+  ]);
 
-  return <Overview totals={totals} />;
+  return (
+    <Overview
+      totals={totals}
+      categoryTotals={categoryTotals}
+      productDailyStats={productDailyStats}
+    />
+  );
 }

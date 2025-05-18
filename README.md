@@ -1,6 +1,6 @@
 # dunnhumby Product Management Dashboard
 
-yadda yadda
+A Simple Product Management Dashboard built using .NET Core & Next.js
 
 ## Backend
 
@@ -23,3 +23,5 @@ yarn / pnpm / bun install (bun was used during dev)
 rename .env.example to .env
 
 yarn / pnpm / bun dev
+
+app runs on http://localhost:3000/

@@ -17,5 +17,5 @@ public interface IProductRepository
     
     Task<IEnumerable<Product>> GetProductsInDateRangeAsync(DateTime fromDate, DateTime toDate);
     
-    Task<IEnumerable<CategoryTotalResult>> GetCategoryTotalsInDateRangeAsync(DateTime fromDate, DateTime toDate);
+    Task<IEnumerable<(DateTime Date, int ProductCount, int StockQuantity)>> GetDailyProductStatsAsync(DateTime fromDate, DateTime toDate);
 }

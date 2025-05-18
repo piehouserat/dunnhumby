@@ -5,17 +5,9 @@ using Dunnhumby.Domain.Products;
 
 namespace Dunnhumby.Services.Products;
 
-public class ProductCommandService : IProductCommandService
+public class ProductCommandService(IProductRepository productRepository, ICategoryRepository categoryRepository)
+    : IProductCommandService
 {
-    private readonly IProductRepository _productRepository;
-    private readonly ICategoryRepository _categoryRepository;
-
-    public ProductCommandService(IProductRepository productRepository, ICategoryRepository categoryRepository)
-    {
-        _productRepository = productRepository;
-        _categoryRepository = categoryRepository;
-    }
-
     public async Task<Guid> CreateProductAsync(CreateProductRequest request)
     {
         var product = new Product
@@ -30,28 +22,27 @@ public class ProductCommandService : IProductCommandService
             DateAdded = DateTime.UtcNow,
         };
 
-        await _productRepository.AddAsync(product);
+        await productRepository.AddAsync(product);
+        
         return product.Id;
-
     }
-
-
+    
     public async Task DeleteProductAsync(Guid id)
     {
-        var product = await _productRepository.GetByIdAsync(id);
+        var product = await productRepository.GetByIdAsync(id);
         if (product == null)
         {
             throw new Exception("Product not found");
         }
-        await _productRepository.DeleteAsync(id);
+        await productRepository.DeleteAsync(id);
     }
 
     public async Task SeedAsync()
     {
         // Clear all existing products
-        await _productRepository.DeleteAllAsync();
+        await productRepository.DeleteAllAsync();
 
-        var categories = await _categoryRepository.GetAllAsync();
+        var categories = await categoryRepository.GetAllAsync();
         var random = new Random();
     
         // Calculate date range
@@ -63,7 +54,7 @@ public class ProductCommandService : IProductCommandService
         {
             var count = random.Next(50, 101);
 
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 // Generate random date within the last 2 years
                 var randomDays = random.Next(rangeDays);
@@ -81,7 +72,7 @@ public class ProductCommandService : IProductCommandService
                     CategoryId = category.Id
                 };
 
-                await _productRepository.AddAsync(product);
+                await productRepository.AddAsync(product);
             }
         }
     }

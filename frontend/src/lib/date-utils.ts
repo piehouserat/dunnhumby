@@ -1,4 +1,4 @@
-import { format, startOfMonth } from "date-fns";
+import { format, startOfMonth, subDays, subMonths } from "date-fns";
 
 export const formatDate = (dateString: string) => {
   if (!dateString) return;
@@ -18,4 +18,8 @@ export const getStartOfCurrentMonth = () => {
 
 export const getToday = () => {
   return new Date();
+};
+
+export const getStartOfPreviousMonth = () => {
+  return startOfMonth(subMonths(new Date(), 1));
 };

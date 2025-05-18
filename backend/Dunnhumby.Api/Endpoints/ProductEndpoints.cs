@@ -64,15 +64,21 @@ public static class ProductEndpoints
         });
         
         endpoints.MapGet("/products/totals", async (
-            [FromQuery] DateTime? startDate, 
-            [FromQuery] DateTime? endDate, 
+            [AsParameters] DateRangeRequest request,
             IProductQueryService productService) =>
         {
-            var from = startDate ?? DateTime.Now.Date.StartOfMonth();
-            var to = endDate ?? DateTime.Now;
+
     
-            var totals = await productService.GetProductTotalsAsync(from, to);
+            var totals = await productService.GetProductTotalsAsync(request.StartDate, request.EndDate);
             return Results.Ok(totals);
+        });
+        
+        endpoints.MapGet("/products/daily-stats", async (
+            [AsParameters] DateRangeRequest request,
+            IProductQueryService productService) =>
+        {
+            var stats = await productService.GetDailyProductStatsAsync(request.StartDate, request.EndDate);
+            return Results.Ok(stats);
         });
         
         return endpoints;

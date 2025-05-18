@@ -1,3 +1,4 @@
+using Dunnhumby.Contracts;
 using Dunnhumby.Services.Categories;
 
 namespace Dunnhumby.Api.Endpoints;
@@ -23,6 +24,14 @@ public static class CategoryEndpoints
             {
                 return Results.Problem($"Failed to seed categories: {ex.Message}");
             }
+        });
+        
+        endpoints.MapGet("/categories/totals", async (
+            ICategoryQueryService categoryService,
+            [AsParameters] DateRangeRequest request) =>
+        {
+            var totals = await categoryService.GetCategoryTotalsAsync(request.StartDate, request.EndDate);
+            return Results.Ok(totals);
         });
 
         return endpoints;
