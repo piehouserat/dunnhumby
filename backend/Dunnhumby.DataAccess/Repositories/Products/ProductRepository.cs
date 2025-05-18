@@ -78,6 +78,7 @@ public class ProductRepository : IProductRepository
             .Select(g => new CategoryTotalResult(
                 g.Key.CategoryId,
                 g.Key.Name,
+                g.Count(),
                 g.Sum(p => p.StockQuantity),
                 g.Sum(p => p.Price * p.StockQuantity)
             ))

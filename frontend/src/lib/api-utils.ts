@@ -1,4 +1,4 @@
-import type { Category, CreateProduct, Product } from "@/lib/types";
+import type { Category, CreateProduct, Product, Totals } from "@/lib/types";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -62,4 +62,17 @@ export async function deleteProduct(id: string) {
     },
   });
   return response;
+}
+
+export type GetTotalsParams = {
+  startDate?: string;
+  endDate?: string;
+};
+
+export async function getTotals(params: GetTotalsParams) {
+  const response = await fetch(
+    `${baseUrl}/products/totals?${createQueryString(params)}`,
+  );
+  const statsData: Totals = await response.json();
+  return statsData;
 }

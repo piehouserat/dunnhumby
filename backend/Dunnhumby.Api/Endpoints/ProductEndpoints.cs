@@ -64,12 +64,12 @@ public static class ProductEndpoints
         });
         
         endpoints.MapGet("/products/totals", async (
-            [FromQuery] DateTime? fromDate, 
-            [FromQuery] DateTime? toDate, 
+            [FromQuery] DateTime? startDate, 
+            [FromQuery] DateTime? endDate, 
             IProductQueryService productService) =>
         {
-            var from = fromDate ?? DateTime.Now.Date.StartOfMonth();
-            var to = toDate ?? DateTime.Now;
+            var from = startDate ?? DateTime.Now.Date.StartOfMonth();
+            var to = endDate ?? DateTime.Now;
     
             var totals = await productService.GetProductTotalsAsync(from, to);
             return Results.Ok(totals);

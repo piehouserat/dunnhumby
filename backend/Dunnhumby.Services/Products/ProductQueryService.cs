@@ -62,8 +62,9 @@ public class ProductQueryService : IProductQueryService
             .Select(ct => new CategoryTotalsDto(
                 ct.CategoryId,
                 ct.CategoryName,
-                ct.TotalQuantity,
-                ct.TotalValue
+                ct.ProductCount,
+                ct.StockQuantity,
+                ct.StockValue
             ))
             .ToList();
 

@@ -23,3 +23,18 @@ export type CreateProduct = {
   sku?: string;
   stockQuantity?: number;
 };
+
+export type Totals = {
+  totalProductCount: number;
+  totalStockQuantity: number;
+  totalStockValue: number;
+  categoryTotals: CategoryTotals[];
+};
+
+export type CategoryTotals = {
+  categoryId: string;
+  categoryName: string;
+  productCount: number;
+  stockQuantity: number;
+  stockValue: number;
+};

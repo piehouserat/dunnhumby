@@ -1,6 +1,6 @@
 import { columns } from "@/components/products/columns";
 import { ProductsTable } from "@/components/products/products-table";
-import { ProductsTableFilters } from "@/components/products/products-table-filters";
+// import { ProductsTableFilters } from "@/components/products/products-table-filters";
 import { AddProductDialog } from "@/components/products/add-product-dialog";
 import {
   getProducts,
@@ -9,6 +9,7 @@ import {
 } from "@/lib/api-utils";
 import { productsSearchParamsCache } from "@/lib/search-params";
 import type { SearchParams } from "nuqs/server";
+import { Header } from "@/components/header";
 
 export default async function Products({
   searchParams,
@@ -32,12 +33,16 @@ export default async function Products({
   const pageCount = Math.ceil(total / pageSize);
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <ProductsTableFilters categories={categories} />
-        <AddProductDialog categories={categories} />
-      </div>
+    <>
+      <Header
+        actions={
+          <div className="flex gap-4 items-center">
+            {/* <ProductsTableFilters categories={categories} /> */}
+            <AddProductDialog categories={categories} />
+          </div>
+        }
+      />
       <ProductsTable columns={columns} data={products} pageCount={pageCount} />
-    </div>
+    </>
   );
 }

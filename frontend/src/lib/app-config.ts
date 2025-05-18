@@ -52,40 +52,40 @@ export const sidebarData: SidebarData = {
       url: "/categories",
       icon: ListIcon,
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2Icon,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
+    // {
+    //   title: "Settings",
+    //   url: "#",
+    //   icon: Settings2Icon,
+    //   items: [
+    //     {
+    //       title: "General",
+    //       url: "#",
+    //     },
+    //     {
+    //       title: "Team",
+    //       url: "#",
+    //     },
+    //     {
+    //       title: "Billing",
+    //       url: "#",
+    //     },
+    //     {
+    //       title: "Limits",
+    //       url: "#",
+    //     },
+    //   ],
+    // },
   ],
   navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoyIcon,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: SendIcon,
-    },
+    // {
+    //   title: "Support",
+    //   url: "#",
+    //   icon: LifeBuoyIcon,
+    // },
+    // {
+    //   title: "Feedback",
+    //   url: "#",
+    //   icon: SendIcon,
+    // },
   ],
 };
