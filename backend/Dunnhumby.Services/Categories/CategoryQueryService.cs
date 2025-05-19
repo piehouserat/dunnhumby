@@ -5,23 +5,16 @@ using Dunnhumby.Domain.Products;
 
 namespace Dunnhumby.Services.Categories;
 
-public class CategoryQueryService : ICategoryQueryService
+public class CategoryQueryService(ICategoryRepository repository) : ICategoryQueryService
 {
-    private readonly ICategoryRepository _repository;
-
-    public CategoryQueryService(ICategoryRepository repository)
-    {
-        _repository = repository;
-    }
-
     public async Task<IEnumerable<Category>> GetAllCategoriesAsync(int pageNumber, int pageSize)
     {
-        return await _repository.GetAllAsync();
+        return await repository.GetAllAsync();
     }
 
     public async Task<Category?> GetCategoryByIdAsync(Guid id)
     {
-        return await _repository.GetByIdAsync(id);
+        return await repository.GetByIdAsync(id);
     }
 
     public async Task<IEnumerable<CategoryTotalsDto>> GetCategoryTotalsAsync(DateTime? fromDate = null, DateTime? toDate = null)
@@ -29,7 +22,7 @@ public class CategoryQueryService : ICategoryQueryService
         var from = fromDate ?? DateTime.Now.Date.StartOfMonth();
         var to = toDate ?? DateTime.Now;
         
-        var categoryTotals = await _repository.GetCategoryTotalsInDateRangeAsync(from, to);
+        var categoryTotals = await repository.GetCategoryTotalsInDateRangeAsync(from, to);
 
         var categoryTotalsDtos = categoryTotals
             .Select(ct => new CategoryTotalsDto(

@@ -3,53 +3,46 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dunnhumby.DataAccess.Repositories.Categories;
 
-public class CategoryRepository : ICategoryRepository
+public class CategoryRepository(ApplicationDbContext context) : ICategoryRepository
 {
-    private readonly ApplicationDbContext _context;
-
-    public CategoryRepository(ApplicationDbContext context)
-    {
-        _context = context;
-    }
-
     public async Task<IEnumerable<Category>> GetAllAsync()
     {
-        return await _context.Categories.OrderBy(c => c.Name).ToListAsync();
+        return await context.Categories.OrderBy(c => c.Name).ToListAsync();
     }
 
-    public async Task<Category> GetByIdAsync(Guid id)
+    public async Task<Category?> GetByIdAsync(Guid id)
     {
-        return await _context.Categories.FindAsync(id);
+        return await context.Categories.FindAsync(id);
     }
 
     public async Task<Category> AddAsync(Category category)
     {
-        await _context.Categories.AddAsync(category);
-        await _context.SaveChangesAsync();
+        await context.Categories.AddAsync(category);
+        await context.SaveChangesAsync();
         return category;
     }
 
     public async Task UpdateAsync(Category category)
     {
-        _context.Entry(category).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
+        context.Entry(category).State = EntityState.Modified;
+        await context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(Guid id)
     {
-        var category = await _context.Categories.FindAsync(id);
+        var category = await context.Categories.FindAsync(id);
         if (category != null)
         {
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            context.Categories.Remove(category);
+            await context.SaveChangesAsync();
         }
     }
     
     public async Task<IEnumerable<CategoryTotalResult>> GetCategoryTotalsInDateRangeAsync(DateTime fromDate, DateTime toDate)
     {
-        return await _context.Categories
+        return await context.Categories
             .GroupJoin(
-                _context.Products.Where(p => p.DateAdded >= fromDate && p.DateAdded <= toDate),
+                context.Products.Where(p => p.DateAdded >= fromDate && p.DateAdded <= toDate),
                 c => c.Id,
                 p => p.CategoryId,
                 (category, products) => new CategoryTotalResult(

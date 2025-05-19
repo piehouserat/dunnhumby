@@ -3,18 +3,11 @@ using Dunnhumby.Domain.Products;
 
 namespace Dunnhumby.Services.Categories;
 
-public class CategoryCommandService : ICategoryCommandService
+public class CategoryCommandService(ICategoryRepository repository) : ICategoryCommandService
 {
-    private readonly ICategoryRepository _repository;
-
-    public CategoryCommandService(ICategoryRepository repository)
-    {
-        _repository = repository;
-    }
-    
     public async Task SeedAsync()
     {
-        var existing = await _repository.GetAllAsync();
+        var existing = await repository.GetAllAsync();
         
         if (existing.Any())
         {
@@ -47,7 +40,7 @@ public class CategoryCommandService : ICategoryCommandService
 
         foreach (var category in categories)
         {
-            await _repository.AddAsync(category);
+            await repository.AddAsync(category);
         }
     }
 }

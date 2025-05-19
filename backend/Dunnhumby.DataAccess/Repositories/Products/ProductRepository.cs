@@ -4,18 +4,11 @@ using Dunnhumby.Domain.Products;
 
 namespace Dunnhumby.DataAccess.Repositories.Products;
 
-public class ProductRepository : IProductRepository
+public class ProductRepository(ApplicationDbContext context) : IProductRepository
 {
-    private readonly ApplicationDbContext _context;
-
-    public ProductRepository(ApplicationDbContext context)
-    {
-        _context = context;
-    }
-
     public async Task<PagedResult<Product>> GetAllAsync(int? page = null, int? pageSize = null, Guid? categoryId = null, ProductOrderBy? orderBy = null, bool? isDescending = null)
     {
-        var query = _context.Products
+        var query = context.Products
             .Include(p => p.Category)
             .AsNoTracking();
 
@@ -69,19 +62,19 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product?> GetByIdAsync(Guid id)
     {
-        return await _context.Products.FindAsync(id);
+        return await context.Products.FindAsync(id);
     }
 
     public async Task<Product> AddAsync(Product product)
     {
-        await _context.Products.AddAsync(product);
-        await _context.SaveChangesAsync();
+        await context.Products.AddAsync(product);
+        await context.SaveChangesAsync();
         return product;
     }
 
     public async Task DeleteAsync(Guid id)
     {
-        int affectedRows = await _context.Products.Where(p => p.Id == id).ExecuteDeleteAsync();
+        int affectedRows = await context.Products.Where(p => p.Id == id).ExecuteDeleteAsync();
         
         if (affectedRows == 0)
         {
@@ -91,12 +84,12 @@ public class ProductRepository : IProductRepository
 
     public async Task DeleteAllAsync()
     {
-        await _context.Products.ExecuteDeleteAsync();
+        await context.Products.ExecuteDeleteAsync();
     }
     
     public async Task<IEnumerable<Product>> GetProductsInDateRangeAsync(DateTime fromDate, DateTime toDate)
     {
-        return await _context.Products
+        return await context.Products
             .Where(p => p.DateAdded >= fromDate && p.DateAdded <= toDate)
             .ToListAsync();
     }
@@ -105,7 +98,7 @@ public class ProductRepository : IProductRepository
         DateTime fromDate, 
         DateTime toDate)
     {
-        var results = await _context.Products
+        var results = await context.Products
             .Where(p => p.DateAdded.Date >= fromDate.Date && p.DateAdded.Date <= toDate.Date)
             .GroupBy(p => p.DateAdded.Date)
             .Select(g => new
