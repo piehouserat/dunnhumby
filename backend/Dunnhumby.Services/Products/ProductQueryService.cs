@@ -1,14 +1,21 @@
 using Dunnhumby.Contracts;
 using Dunnhumby.DataAccess.Repositories.Products;
 using Dunnhumby.Common.Extensions;
+using Dunnhumby.Domain.Products;
 
 namespace Dunnhumby.Services.Products;
 
 public class ProductQueryService(IProductRepository repository) : IProductQueryService
 {
-    public async Task<PaginatedResponse<ProductDto>> GetAllProductsAsync(int pageNumber, int pageSize, Guid? categoryId = null)
+    public async Task<PaginatedResponse<ProductDto>> GetAllProductsAsync(int? page = null, int? pageSize = null, Guid? categoryId = null, string? orderBy = null, bool? isDescending = null)
     {
-        var pagedResult = await repository.GetAllAsync(pageNumber, pageSize, categoryId);
+        var orderByEnum = orderBy != null 
+            ? Enum.TryParse<ProductOrderBy>(orderBy, true, out var result) 
+                ? result 
+                : ProductOrderBy.DateAdded 
+            : ProductOrderBy.DateAdded;
+
+        var pagedResult = await repository.GetAllAsync(page, pageSize, categoryId, orderByEnum, isDescending);
 
         var productDtos = pagedResult.Items.Select(p => new ProductDto(
             p.Id,

@@ -38,7 +38,7 @@ const productSchema = z.object({
   categoryId: z.string().min(1, "Category is required"),
   productCode: z.string().min(1, "Product code is required"),
   sku: z.string().min(1, "SKU is required"),
-  stockQuantity: z.number().min(0, "Stock quantity must be greater than 0"),
+  stockQuantity: z.number().min(1, "Stock quantity is required"),
 });
 
 type ProductFormValues = z.infer<typeof productSchema>;

@@ -5,7 +5,7 @@ namespace Dunnhumby.DataAccess.Repositories.Products;
 
 public interface IProductRepository
 {
-    Task<PagedResult<Product>> GetAllAsync(int pageNumber, int pageSize, Guid? categoryId = null);
+    Task<PagedResult<Product>> GetAllAsync(int? page = null, int? pageSize = null, Guid? categoryId = null, ProductOrderBy? orderBy = null, bool? isDescending = null);
     
     Task<Product?> GetByIdAsync(Guid id);
     

@@ -16,39 +16,88 @@ import { CurrencyFormatter, DateTimeFormatter } from "../formatters";
 import { toast } from "sonner";
 import { useAction } from "next-safe-action/hooks";
 import { deleteProductAction } from "@/actions/delete-product-action";
+import { DataTableColumnHeader } from "../ui/data-table-column-header";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export const columns: ColumnDef<Product>[] = [
   {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
     accessorKey: "name",
-    header: "Name",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Name" column={column} />
+    ),
+    enableSorting: true,
   },
   {
-    accessorKey: "productCode",
-    header: "Product Code",
-  },
-  {
-    accessorKey: "sku",
-    header: "SKU",
-  },
-  {
+    id: "category",
     accessorKey: "categoryName",
-    header: "Category",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Category" column={column} />
+    ),
+    enableSorting: true,
   },
   {
-    header: "Price",
+    accessorKey: "price",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Price" column={column} />
+    ),
     cell: ({ row }) => <CurrencyFormatter value={row.original.price} />,
+    enableSorting: true,
   },
   {
     accessorKey: "stockQuantity",
-    header: "Stock Quantity",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Stock Quantity" column={column} />
+    ),
+    enableSorting: true,
   },
   {
-    header: "Date Added",
+    accessorKey: "dateAdded",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Date Added" column={column} />
+    ),
     cell: ({ row }) => <DateTimeFormatter value={row.original.dateAdded} />,
+    enableSorting: true,
+  },
+  {
+    accessorKey: "productCode",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Product Code" column={column} />
+    ),
+    enableSorting: false,
+  },
+  {
+    accessorKey: "sku",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="SKU" column={column} />
+    ),
+    enableSorting: false,
   },
   {
     id: "actions",
     enableHiding: false,
+    enableSorting: false,
     cell: ({ row }) => {
       const product = row.original;
 

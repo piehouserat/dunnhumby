@@ -16,10 +16,19 @@ export async function getCategories() {
   return categoriesData;
 }
 
+export type OrderBy =
+  | "name"
+  | "price"
+  | "category"
+  | "stockQuantity"
+  | "dateAdded";
+
 export type GetProductsParams = {
   page?: number;
   pageSize?: number;
   categoryId?: string;
+  orderBy?: OrderBy;
+  isDescending?: boolean;
 };
 
 export type PaginatedResponse<T> = {
@@ -28,7 +37,7 @@ export type PaginatedResponse<T> = {
 };
 
 function createQueryString(
-  params: Record<string, string | number | null | undefined>,
+  params: Record<string, string | number | null | undefined | boolean>,
 ): string {
   const filteredParams = Object.fromEntries(
     Object.entries(params).filter(

@@ -9,11 +9,9 @@ public static class ProductEndpoints
 {
     public static IEndpointRouteBuilder MapProductEndpoints(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet("/products", async (int? page, int? pageSize, Guid? categoryId, IProductQueryService productService) =>
+        endpoints.MapGet("/products", async ([AsParameters] GetProductsRequest request, IProductQueryService productService) =>
         {
-            var currentPage = page ?? 1;
-            var currentPageSize = pageSize ?? 10;
-            var response = await productService.GetAllProductsAsync(currentPage, currentPageSize, categoryId);
+            var response = await productService.GetAllProductsAsync(request.Page, request.PageSize, request.CategoryId, request.OrderBy, request.IsDescending);
             return Results.Ok(response);
         });
         

@@ -16,10 +16,13 @@ export function ProductsTable<TData, TValue>({
   data,
   pageCount,
 }: ProductsTableProps<TData, TValue>) {
-  const [{ page, pageSize: currentPageSize }, setSearchParams] = useQueryStates(
-    productsSearchParams,
-    { shallow: false, clearOnDefault: true },
-  );
+  const [
+    { page, pageSize: currentPageSize, orderBy, isDescending },
+    setSearchParams,
+  ] = useQueryStates(productsSearchParams, {
+    shallow: false,
+    clearOnDefault: true,
+  });
 
   const handlePaginationChange = (
     newPageIndex: number,
@@ -28,6 +31,20 @@ export function ProductsTable<TData, TValue>({
     setSearchParams({
       page: newPageIndex + 1,
       pageSize: newPageSize,
+      orderBy,
+      isDescending,
+    });
+  };
+
+  const handleSortingChange = (
+    newOrderBy: string,
+    newIsDescending: boolean,
+  ) => {
+    setSearchParams({
+      page: 1, // Reset to first page when sorting changes
+      pageSize: currentPageSize,
+      orderBy: newOrderBy,
+      isDescending: newIsDescending,
     });
   };
 
@@ -39,6 +56,11 @@ export function ProductsTable<TData, TValue>({
       pageIndex={page - 1}
       pageSize={currentPageSize}
       onPaginationChange={handlePaginationChange}
+      sorting={{
+        orderBy: orderBy || "",
+        isDescending: isDescending || false,
+        onSortingChange: handleSortingChange,
+      }}
     />
   );
 }

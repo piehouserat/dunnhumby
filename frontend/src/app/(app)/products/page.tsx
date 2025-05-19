@@ -6,6 +6,7 @@ import {
   getProducts,
   getCategories,
   type GetProductsParams,
+  type OrderBy,
 } from "@/lib/api-utils";
 import { productsSearchParamsCache } from "@/lib/search-params";
 import type { SearchParams } from "nuqs/server";
@@ -16,13 +17,15 @@ export default async function Products({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
-  const { page, pageSize, categoryId } =
+  const { page, pageSize, categoryId, orderBy, isDescending } =
     await productsSearchParamsCache.parse(searchParams);
 
   const getProductsParams: GetProductsParams = {
     page,
     pageSize,
     categoryId,
+    orderBy: orderBy as OrderBy | undefined,
+    isDescending,
   };
 
   const [{ data: products, total }, categories] = await Promise.all([

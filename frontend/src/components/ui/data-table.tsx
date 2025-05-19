@@ -3,6 +3,7 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -22,6 +23,11 @@ interface DataTableProps<TData, TValue> {
   pageIndex?: number;
   pageSize?: number;
   onPaginationChange?: (pageIndex: number, pageSize: number) => void;
+  sorting?: {
+    orderBy: string;
+    isDescending: boolean;
+    onSortingChange: (orderBy: string, isDescending: boolean) => void;
+  };
 }
 
 export function DataTable<TData, TValue>({
@@ -31,19 +37,31 @@ export function DataTable<TData, TValue>({
   pageIndex,
   pageSize,
   onPaginationChange,
+  sorting,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    ...(pageCount !== undefined && {
-      pageCount,
-      state: {
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      ...(pageCount !== undefined && {
         pagination: {
           pageIndex: pageIndex ?? 0,
           pageSize: pageSize ?? 10,
         },
-      },
+      }),
+      ...(sorting && {
+        sorting: [
+          {
+            id: sorting.orderBy,
+            desc: sorting.isDescending,
+          },
+        ],
+      }),
+    },
+    ...(pageCount !== undefined && {
+      pageCount,
       onPaginationChange: (updater) => {
         if (typeof updater === "function") {
           const newState = updater({
@@ -56,6 +74,22 @@ export function DataTable<TData, TValue>({
         }
       },
       manualPagination: true,
+    }),
+    ...(sorting && {
+      onSortingChange: (updater) => {
+        if (typeof updater === "function") {
+          const newState = updater([
+            {
+              id: sorting.orderBy,
+              desc: sorting.isDescending,
+            },
+          ]);
+          sorting.onSortingChange(newState[0].id, newState[0].desc);
+        } else {
+          sorting.onSortingChange(updater[0].id, updater[0].desc);
+        }
+      },
+      manualSorting: true,
     }),
   });
 

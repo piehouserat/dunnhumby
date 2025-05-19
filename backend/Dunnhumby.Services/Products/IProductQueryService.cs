@@ -5,7 +5,7 @@ namespace Dunnhumby.Services.Products;
 
 public interface IProductQueryService
 {
-    Task<PaginatedResponse<ProductDto>> GetAllProductsAsync(int pageNumber, int pageSize, Guid? categoryId = null);
+    Task<PaginatedResponse<ProductDto>> GetAllProductsAsync(int? page = null, int? pageSize = null, Guid? categoryId = null, string? orderBy = null, bool? isDescending = false);
     
     Task<ProductDto?> GetProductByIdAsync(Guid id);
     

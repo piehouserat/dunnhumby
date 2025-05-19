@@ -13,24 +13,56 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
-    public async Task<PagedResult<Product>> GetAllAsync(int pageNumber, int pageSize, Guid? categoryId = null)
+    public async Task<PagedResult<Product>> GetAllAsync(int? page = null, int? pageSize = null, Guid? categoryId = null, ProductOrderBy? orderBy = null, bool? isDescending = null)
     {
         var query = _context.Products
             .Include(p => p.Category)
-            .AsQueryable();
+            .AsNoTracking();
 
         if (categoryId.HasValue)
         {
             query = query.Where(p => p.CategoryId == categoryId.Value);
         }
+        
+        if (orderBy == null)
+        {
+            query = query.OrderByDescending(p => p.DateAdded);
+        }
+        else
+        {
+            var descending = isDescending ?? true;
+        
+            query = orderBy.Value switch
+            {
+                ProductOrderBy.Name => descending 
+                    ? query.OrderByDescending(p => p.Name)
+                    : query.OrderBy(p => p.Name),
+                ProductOrderBy.Price => descending 
+                    ? query.OrderByDescending(p => (double)p.Price)
+                    : query.OrderBy(p => (double)p.Price),
+                ProductOrderBy.Category => descending 
+                    ? query.OrderByDescending(p => p.Category.Name)
+                    : query.OrderBy(p => p.Category.Name),
+                ProductOrderBy.StockQuantity => descending 
+                    ? query.OrderByDescending(p => p.StockQuantity)
+                    : query.OrderBy(p => p.StockQuantity),
+                ProductOrderBy.DateAdded => descending 
+                    ? query.OrderByDescending(p => p.DateAdded)
+                    : query.OrderBy(p => p.DateAdded),
+                _ => query.OrderByDescending(p => p.DateAdded)
+            };
+        }
 
         var totalCount = await query.CountAsync();
 
-        var products = await query
-            .OrderByDescending(p => p.DateAdded)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        if (page.HasValue && pageSize.HasValue)
+        {
+            query = query
+                .Skip((page.Value - 1) * pageSize.Value)
+                .Take(pageSize.Value);
+        }
+
+        var products = await query.ToListAsync();
 
         return new PagedResult<Product>(products, totalCount);
     }
