@@ -52,29 +52,11 @@ export const sidebarData: SidebarData = {
       url: "/categories",
       icon: ListIcon,
     },
-    // {
-    //   title: "Settings",
-    //   url: "#",
-    //   icon: Settings2Icon,
-    //   items: [
-    //     {
-    //       title: "General",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Team",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Billing",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Limits",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
+    {
+      title: "Settings",
+      url: "/settings",
+      icon: Settings2Icon,
+    },
   ],
   navSecondary: [
     // {

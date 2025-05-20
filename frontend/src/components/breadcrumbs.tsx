@@ -8,7 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { useSelectedLayoutSegments, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const segmentMap = {
   settings: "Settings",
@@ -23,8 +23,8 @@ const getSegmentName = (segment: string) => {
 };
 
 export function Breadcrumbs() {
-  const segments = useSelectedLayoutSegments();
   const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
 
   return (
     <Breadcrumb>
